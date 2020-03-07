@@ -1,3 +1,5 @@
+"use strict"
+
 document.getElementById("btn-night").addEventListener("click", function() {
     document.body.style.backgroundColor = "#110038";
     document.getElementById("logo").src = "img/gifOF_logo_dark.png";
@@ -33,20 +35,23 @@ let apiKey = "X9RaiTfV4ox9bTTI07YUGvvyKHsQVA1Q";
 let searchFromBar = "cat";
 console.log(searchFromBar)
 
-let trendingBoxes;
+let trendingBoxes = [];
 
 (async function getSearchResults(search, apiKey) {
-    const found = await fetch("https://api.giphy.com/v1/gifs/trending?api_key=X9RaiTfV4ox9bTTI07YUGvvyKHsQVA1Q&limit=4&rating=G")
-        .then(response => {
-            return response.json();
-        })
-        .then(data => {
-            return data;
-        })
-        .catch(error => {
-            return error;
-        });
-    trendingBoxes = found;
+    for (let i = 0; i < 4; i++) {
+        const found = await fetch("https://api.giphy.com/v1/gifs/random?api_key=X9RaiTfV4ox9bTTI07YUGvvyKHsQVA1Q&tag=&rating=R")
+            .then(response => {
+                return response.json();
+            })
+            .then(data => {
+                return data;
+            })
+            .catch(error => {
+                return error;
+            });
+        trendingBoxes.push(found);
+        console.log(trendingBoxes)
+    }
     calculating();
 })()
 
@@ -59,7 +64,10 @@ console.log(trendingBoxes);
 function calculating() {
     for (let i = 0; i < 4; i++) {
         let trendinImg = "trending" + i;
-        let imagesrc = trendingBoxes.data[i].images.downsized.url;
+        let imagesrc = trendingBoxes[i].data.images.downsized.url;
+        let text = trendingBoxes[i].data.title;
+        console.log(text)
+        document.getElementById("title-box" + i).innerHTML = text;
         console.log(imagesrc + " " + trendinImg)
         let element = document.getElementById(trendinImg)
         element.src = imagesrc;
