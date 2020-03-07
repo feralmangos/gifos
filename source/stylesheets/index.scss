@@ -224,6 +224,7 @@
         margin-right: 140px;
         margin-left: 100px;
         p {
+            padding-top: 12px;
             width: 100%;
             background: #FFFFFF;
             border: 1px solid #979797;
@@ -288,3 +289,5 @@
             padding: 2.5px 2.5px 0px 2.5px;
         }
     }
+    
+    //sass --watch source/stylesheets/index.scss build/stylesheets/index.css

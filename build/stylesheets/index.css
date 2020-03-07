@@ -223,6 +223,7 @@ body {
   margin-left: 100px;
 }
 .input-text2 p {
+  padding-top: 12px;
   width: 100%;
   background: #FFFFFF;
   border: 1px solid #979797;
